@@ -1,0 +1,18 @@
+Parser:
+    Init:
+        ✔ Fix url
+    Downloader:
+        ✔ Download
+        ✔ Make list
+        ☐ Cache
+            ☐ With checking cache
+            ☐ Withoug checking cache @started(25-10-05 16:22)
+    Formatter:
+        ✔ To TXT @started(25-10-04 20:25) @done(25-10-04 23:51) @lasted(3h26m26s)
+        ☐ To PDF
+            ☐ With images
+            ☐ Without images
+        ☐ To HTML
+            ☐ With images
+            ☐ Without images
+        ☐ Settings
