@@ -1,14 +1,15 @@
-import re, requests, bs4, os
+import re, requests, bs4, time
 
 
 class Downloader:
-    list = None
+    fic_cover = {}
+    list = []
 
     ficton_id = None
 
     def __init__(self, url):
         #Example
-        #https://www.royalroad.com/fiction/48893/the-dungeon-without-a-system
+        #https://www.royalroad.com/fiction/134167/sector-bomb
 
         #Extractin' fiction ID
         #Check if valid URL
@@ -23,8 +24,7 @@ class Downloader:
     def get_url_list(self):
         soup = bs4.BeautifulSoup(requests.get(url=self.url).content, features="html.parser")
 
-        list = []
-
+        #URL list
         for row in soup.find_all(class_ = "chapter-row"):
             chapter = {}
 
@@ -35,18 +35,75 @@ class Downloader:
 
             chapter["content"] = None
 
-            list.append(chapter)
+            self.list.append(chapter)
 
-        self.list = list
-        return list
+        #Name, author
+        #TODO: Image 
+        self.fic_cover["name"] = soup.find(class_ = "fic-title").find("h1").text
+        self.fic_cover["author"] = soup.find(class_ = "mt-card-content").find("h3").text.strip()
+
+        return self.list
     
-    def download(self):
+    def download(self, output = True): #TODO: Cache and cache check
         if not self.list:
             self.get_url_list()
         
-        for chapter in self.list:
-            soup = bs4.BeautifulSoup(requests.get(chapter["url"]))
+        for i in range(len(self.list)):
+            soup = bs4.BeautifulSoup(requests.get(url=self.list[i]["url"]).content, features="html.parser")
+            self.list[i]["content"] = soup.find("div", class_="chapter-inner chapter-content").contents
+
+            if output:
+                print(f"Downloaded {self.list[i]["name"]} ({i+1}/{len(self.list)})")
+            
+            #A bit of wait to not get banned
+            time.sleep(0.5)
+
+        return self.list
+    
+    def _get_text(self, content):
+        #Get text from chapter in array
+        soup = bs4.BeautifulSoup(str(content), features="html.parser")
+
+        text = []
+
+        for div in soup.find_all("p"):
+            text.append(div.text)
+
+        return text
+    
+    def _get_filename(self, name):
+        name = str(name).lower()
+        name = re.sub(r'[^a-z0-9]+', '_', name)
+        name = name.strip("_")
+
+        return(name)
+    
+    def to_txt(self): #TODO: PDF formatter with images
+        # if not self.list:
+        #     self.download()
+
+        file = open(self._get_filename(self.fic_cover["name"]) + ".txt", "w")
+
+        #Title
+        file.write(f"{self.fic_cover["name"]}\nBy {self.fic_cover["author"]}\n")
+
+        for i in range(len(self.list)):
+            file.write(f"\n\n{self.list[i]["name"]}\nDate: {self.list[i]["date"]}\n\n")
+
+            content = self._get_text(self.list[i]["content"])
+
+            for c in content:
+                file.write(c + "\n")
+
+            
+
+    def to_pdf(self):
+        pass
+
+    def to_html(self):
+        pass
 
 if __name__ == "__main__":
-    g = Downloader("https://www.royalroad.com/fiction/33844/the-runesmith")
-    print(g.get_url_list())
+    g = Downloader("https://www.royalroad.com/fiction/134167/sector-bomb")
+    g.download()
+    g.to_txt()
