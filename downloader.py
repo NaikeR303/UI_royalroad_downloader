@@ -1,9 +1,12 @@
-import re, requests, bs4, time
+import re, requests, bs4, time, os
 
 
 class Downloader:
     fic_cover = {}
     list = []
+
+    cache_folder = "cache"
+    fic_folder = None
 
     ficton_id = None
 
@@ -20,6 +23,10 @@ class Downloader:
         
         #Full Url
         self.url = "https://www.royalroad.com/fiction/" + self.ficton_id
+
+        #Cache
+        if not os.path.exists(self.cache_folder):
+            os.mkdir(self.cache_folder)
 
     def get_url_list(self):
         soup = bs4.BeautifulSoup(requests.get(url=self.url).content, features="html.parser")
@@ -42,6 +49,11 @@ class Downloader:
         self.fic_cover["name"] = soup.find(class_ = "fic-title").find("h1").text
         self.fic_cover["author"] = soup.find(class_ = "mt-card-content").find("h3").text.strip()
 
+        #Cache
+        self.fic_folder = self.cache_folder + "/" + self.ficton_id
+        if not os.path.exists(self.fic_folder):
+            os.mkdir(self.fic_folder)
+
         return self.list
     
     def download(self, output = True): #TODO: Cache and cache check
@@ -51,6 +63,16 @@ class Downloader:
         for i in range(len(self.list)):
             soup = bs4.BeautifulSoup(requests.get(url=self.list[i]["url"]).content, features="html.parser")
             self.list[i]["content"] = soup.find("div", class_="chapter-inner chapter-content").contents
+
+            #Cache
+            chap_folder = self.fic_folder + "/" + re.findall(r'\d+', self.list[i]["url"])[1]
+            if not os.path.exists(chap_folder):     
+                os.mkdir(chap_folder)
+
+                with open(chap_folder + "/cache.txt", "w") as file:
+                    text = "".join(str(item) for item in self.list[i]["content"])
+                    file.write(text.strip())
+            
 
             if output:
                 print(f"Downloaded {self.list[i]["name"]} ({i+1}/{len(self.list)})")
@@ -104,6 +126,10 @@ class Downloader:
         pass
 
 if __name__ == "__main__":
+    import shutil
+    if os.path.exists("cache"):
+        shutil.rmtree("cache")
+
+
     g = Downloader("https://www.royalroad.com/fiction/134167/sector-bomb")
     g.download()
-    g.to_txt()

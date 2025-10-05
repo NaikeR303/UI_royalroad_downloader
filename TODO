@@ -6,7 +6,7 @@ Parser:
         ✔ Make list
         ☐ Cache
             ☐ With checking cache
-            ☐ Withoug checking cache @started(25-10-05 16:22)
+            ✔ Withoug checking cache @started(25-10-05 16:22) @done(25-10-05 20:28) @lasted(4h6m46s)
     Formatter:
         ✔ To TXT @started(25-10-04 20:25) @done(25-10-04 23:51) @lasted(3h26m26s)
         ☐ To PDF
