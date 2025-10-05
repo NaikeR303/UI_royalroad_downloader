@@ -4,8 +4,8 @@ Parser:
     Downloader:
         ✔ Download
         ✔ Make list
-        ☐ Cache
-            ☐ With checking cache
+        ✔ Cache @done(25-10-06 01:47)
+            ✔ With checking cache @done(25-10-06 01:47)
             ✔ Withoug checking cache @started(25-10-05 16:22) @done(25-10-05 20:28) @lasted(4h6m46s)
     Formatter:
         ✔ To TXT @started(25-10-04 20:25) @done(25-10-04 23:51) @lasted(3h26m26s)

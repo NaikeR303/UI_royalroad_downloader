@@ -1,9 +1,12 @@
-import re, requests, bs4, time, os
+import re, requests, bs4, time, os, shutil
 
 
 class Downloader:
     fic_cover = {}
     list = []
+    list_d = []
+
+    redownload = False
 
     cache_folder = "cache"
     fic_folder = None
@@ -53,19 +56,33 @@ class Downloader:
         self.fic_folder = self.cache_folder + "/" + self.ficton_id
         if not os.path.exists(self.fic_folder):
             os.mkdir(self.fic_folder)
+        #Deleting if redownload
+        elif self.redownload:
+            shutil.rmtree(self.fic_folder)
+            os.mkdir(self.fic_folder)
 
         return self.list
     
     def download(self, output = True): #TODO: Cache and cache check
         if not self.list:
             self.get_url_list()
+
+        #Checking cache
+        self.list_d = os.listdir(self.fic_folder)
         
         for i in range(len(self.list)):
-            soup = bs4.BeautifulSoup(requests.get(url=self.list[i]["url"]).content, features="html.parser")
-            self.list[i]["content"] = soup.find("div", class_="chapter-inner chapter-content").contents
+            chap_id = re.findall(r'\d+', self.list[i]["url"])[1]
+            chap_folder = self.fic_folder + "/" + chap_id
 
-            #Cache
-            chap_folder = self.fic_folder + "/" + re.findall(r'\d+', self.list[i]["url"])[1]
+            #Reading cache or downloading
+            if chap_id in self.list_d:
+                with open(chap_folder + "/" + "cache.txt", "r") as file:
+                    self.list[i]["content"] = file.read()
+            else:
+                soup = bs4.BeautifulSoup(requests.get(url=self.list[i]["url"]).content, features="html.parser")
+                self.list[i]["content"] = soup.find("div", class_="chapter-inner chapter-content").contents
+
+            #Creating cache
             if not os.path.exists(chap_folder):     
                 os.mkdir(chap_folder)
 
@@ -74,12 +91,16 @@ class Downloader:
                     file.write(text.strip())
             
 
-            if output:
-                print(f"Downloaded {self.list[i]["name"]} ({i+1}/{len(self.list)})")
-            
-            #A bit of wait to not get banned
-            time.sleep(0.5)
+            if chap_id in self.list_d:
+                if output:
+                    print(f"{self.list[i]["name"]} is already downloaded! ({i+1}/{len(self.list)})")
+            else:
+                if output:
+                    print(f"Downloaded {self.list[i]["name"]} ({i+1}/{len(self.list)})")
 
+                #A bit of wait to not get banned
+                time.sleep(0.5)
+            
         return self.list
     
     def _get_text(self, content):
@@ -100,7 +121,7 @@ class Downloader:
 
         return(name)
     
-    def to_txt(self): #TODO: PDF formatter with images
+    def to_txt(self):
         # if not self.list:
         #     self.download()
 
@@ -126,10 +147,10 @@ class Downloader:
         pass
 
 if __name__ == "__main__":
-    import shutil
-    if os.path.exists("cache"):
-        shutil.rmtree("cache")
+    # if os.path.exists("cache"):
+    #     shutil.rmtree("cache")
 
 
     g = Downloader("https://www.royalroad.com/fiction/134167/sector-bomb")
     g.download()
+    g.to_txt()
