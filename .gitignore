@@ -1,0 +1,7 @@
+# Trash
+*.pdf
+*.html
+# Cache
+cache
+# Needed
+!html*.html

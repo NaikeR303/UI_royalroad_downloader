@@ -80,15 +80,15 @@ class Downloader:
                     self.list[i]["content"] = file.read()
             else:
                 soup = bs4.BeautifulSoup(requests.get(url=self.list[i]["url"]).content, features="html.parser")
-                self.list[i]["content"] = soup.find("div", class_="chapter-inner chapter-content").contents
+                text = soup.find("div", class_="chapter-inner chapter-content").contents
+                self.list[i]["content"] = "".join(str(item) for item in text).strip()
 
             #Creating cache
             if not os.path.exists(chap_folder):     
                 os.mkdir(chap_folder)
 
                 with open(chap_folder + "/cache.txt", "w") as file:
-                    text = "".join(str(item) for item in self.list[i]["content"])
-                    file.write(text.strip())
+                    file.write(self.list[i]["content"])
             
 
             if chap_id in self.list_d:
@@ -156,7 +156,7 @@ class Downloader:
         with open(self._get_filename(self.fic_cover["name"]) + ".html", "w") as file:
             file.write(self._create_html(template="html_template_1.html"))
 
-    def to_pdf(self, output = True):
+    def to_pdf(self, output = True): #TODO: Split into files by 100 chapters
         if output:
             print("Creating PDF file, it'll take some time. Please wait...")
         html = weasyprint.HTML(string=self._create_html(template="html_template_2.html"))
@@ -168,7 +168,8 @@ if __name__ == "__main__":
     #     shutil.rmtree("cache")
 
 
-    g = Downloader("https://www.royalroad.com/fiction/98840/transliterated-xenofiction-isekai")
+    g = Downloader("https://www.royalroad.com/fiction/98242/magical-engineering-progression-fantasy-litrpg")
     g.download()
+    # g.to_txt()
     g.to_html()
-    g.to_pdf()
+    # g.to_pdf()

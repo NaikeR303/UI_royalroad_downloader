@@ -16,3 +16,6 @@ Parser:
             ✔ With images @done(25-10-07 00:06)
             ✔ Without images @started(25-10-06 19:00) @done(25-10-06 21:49) @lasted(2h49m3s)
         ☐ Settings
+            ☐ Color scheme
+    Fixes:
+        ☐ Make PDF separate into N chapter per pdf
