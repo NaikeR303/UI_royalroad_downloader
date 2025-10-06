@@ -9,10 +9,10 @@ Parser:
             ✔ Withoug checking cache @started(25-10-05 16:22) @done(25-10-05 20:28) @lasted(4h6m46s)
     Formatter:
         ✔ To TXT @started(25-10-04 20:25) @done(25-10-04 23:51) @lasted(3h26m26s)
-        ☐ To PDF
-            ☐ With images
-            ☐ Without images
-        ☐ To HTML
-            ☐ With images
-            ☐ Without images
+        ✔ To PDF @done(25-10-07 00:06)
+            ✔ With images @done(25-10-07 00:06)
+            ✔ Without images @started(25-10-06 22:39) @done(25-10-07 00:06) @lasted(1h27m38s)
+        ✔ To HTML @done(25-10-07 00:06)
+            ✔ With images @done(25-10-07 00:06)
+            ✔ Without images @started(25-10-06 19:00) @done(25-10-06 21:49) @lasted(2h49m3s)
         ☐ Settings

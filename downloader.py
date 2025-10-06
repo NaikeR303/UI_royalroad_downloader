@@ -1,4 +1,4 @@
-import re, requests, bs4, time, os, shutil
+import re, requests, bs4, time, os, shutil, weasyprint
 
 
 class Downloader:
@@ -63,7 +63,7 @@ class Downloader:
 
         return self.list
     
-    def download(self, output = True): #TODO: Cache and cache check
+    def download(self, output = True):
         if not self.list:
             self.get_url_list()
 
@@ -138,19 +138,37 @@ class Downloader:
             for c in content:
                 file.write(c + "\n")
 
+    def _create_html(self, template = "html_template_1.html"):
+        body = f'<h1><a href="{self.url}">{self.fic_cover['name']}</a></h1>\n<h2>by {self.fic_cover["author"]}</h2>\n<br>\n<br>\n'
+
+        for i in range(len(self.list)):
+            body += f"<h2>{self.list[i]["name"]}</h2>\n"
+            body += f"<h3>{self.list[i]["date"]}</h3>\n"
+            body += f"<div>{self.list[i]["content"]}</div>\n<br>\n<br>\n<br>\n"
+
+        with open(template, "r") as template:
+            html = template.read()
+            html = html.replace("$$$NAME$$$", self.fic_cover["name"]).replace("$$$BODY$$$", body)
+
+        return html
             
-
-    def to_pdf(self):
-        pass
-
     def to_html(self):
-        pass
+        with open(self._get_filename(self.fic_cover["name"]) + ".html", "w") as file:
+            file.write(self._create_html(template="html_template_1.html"))
+
+    def to_pdf(self, output = True):
+        if output:
+            print("Creating PDF file, it'll take some time. Please wait...")
+        html = weasyprint.HTML(string=self._create_html(template="html_template_2.html"))
+        html.write_pdf(self._get_filename(self.fic_cover["name"]) + ".pdf")
+
 
 if __name__ == "__main__":
     # if os.path.exists("cache"):
     #     shutil.rmtree("cache")
 
 
-    g = Downloader("https://www.royalroad.com/fiction/134167/sector-bomb")
+    g = Downloader("https://www.royalroad.com/fiction/98840/transliterated-xenofiction-isekai")
     g.download()
-    g.to_txt()
+    g.to_html()
+    g.to_pdf()
