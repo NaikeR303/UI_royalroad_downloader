@@ -2,20 +2,21 @@ import re, requests, bs4, time, os, shutil, weasyprint
 
 
 class Downloader:
-    fic_cover = {}
-    list = []
-    list_d = []
-
-    redownload = False
-
-    cache_folder = "cache"
-    fic_folder = None
-
-    ficton_id = None
-
     def __init__(self, url):
         #Example
         #https://www.royalroad.com/fiction/134167/sector-bomb
+
+        #Variables
+        self.fic_cover = {}
+        self.list_chap = []
+        self.list_d = []
+
+        self.redownload = False
+
+        self.cache_folder = "cache"
+        self.fic_folder = None
+
+        self.ficton_id = None
 
         #Extractin' fiction ID
         #Check if valid URL
@@ -45,7 +46,7 @@ class Downloader:
 
             chapter["content"] = None
 
-            self.list.append(chapter)
+            self.list_chap.append(chapter)
 
         #Name, author
         #TODO: Image 
@@ -61,47 +62,45 @@ class Downloader:
             shutil.rmtree(self.fic_folder)
             os.mkdir(self.fic_folder)
 
-        return self.list
+        return self.list_chap
     
     def download(self, output = True):
-        if not self.list:
+        if not self.list_chap:
             self.get_url_list()
 
         #Checking cache
         self.list_d = os.listdir(self.fic_folder)
         
-        for i in range(len(self.list)):
-            chap_id = re.findall(r'\d+', self.list[i]["url"])[1]
-            chap_folder = self.fic_folder + "/" + chap_id
+        for i in range(len(self.list_chap)):
+            chap_id = re.findall(r'\d+', self.list_chap[i]["url"])[1]
+            chap_file = self.fic_folder + "/" + chap_id
 
             #Reading cache or downloading
             if chap_id in self.list_d:
-                with open(chap_folder + "/" + "cache.txt", "r") as file:
-                    self.list[i]["content"] = file.read()
+                with open(chap_file, "r") as file:
+                    self.list_chap[i]["content"] = file.read()
             else:
-                soup = bs4.BeautifulSoup(requests.get(url=self.list[i]["url"]).content, features="html.parser")
+                soup = bs4.BeautifulSoup(requests.get(url=self.list_chap[i]["url"]).content, features="html.parser")
                 text = soup.find("div", class_="chapter-inner chapter-content").contents
-                self.list[i]["content"] = "".join(str(item) for item in text).strip()
+                self.list_chap[i]["content"] = "".join(str(item) for item in text).strip()
 
             #Creating cache
-            if not os.path.exists(chap_folder):     
-                os.mkdir(chap_folder)
-
-                with open(chap_folder + "/cache.txt", "w") as file:
-                    file.write(self.list[i]["content"])
+            if not os.path.exists(chap_file):     
+                with open(chap_file, "w") as file:
+                    file.write(self.list_chap[i]["content"])
             
 
             if chap_id in self.list_d:
                 if output:
-                    print(f"{self.list[i]["name"]} is already downloaded! ({i+1}/{len(self.list)})")
+                    print(f"{self.list_chap[i]["name"]} is already downloaded! ({i+1}/{len(self.list_chap)})")
             else:
                 if output:
-                    print(f"Downloaded {self.list[i]["name"]} ({i+1}/{len(self.list)})")
+                    print(f"Downloaded {self.list_chap[i]["name"]} ({i+1}/{len(self.list_chap)})")
 
                 #A bit of wait to not get banned
                 time.sleep(0.5)
             
-        return self.list
+        return self.list_chap
     
     def _get_text(self, content):
         #Get text from chapter in array
@@ -130,10 +129,10 @@ class Downloader:
         #Title
         file.write(f"{self.fic_cover["name"]}\nBy {self.fic_cover["author"]}\n")
 
-        for i in range(len(self.list)):
-            file.write(f"\n\n{self.list[i]["name"]}\nDate: {self.list[i]["date"]}\n\n")
+        for i in range(len(self.list_chap)):
+            file.write(f"\n\n{self.list_chap[i]["name"]}\nDate: {self.list_chap[i]["date"]}\n\n")
 
-            content = self._get_text(self.list[i]["content"])
+            content = self._get_text(self.list_chap[i]["content"])
 
             for c in content:
                 file.write(c + "\n")
@@ -141,10 +140,10 @@ class Downloader:
     def _create_html(self, template = "html_template_1.html"):
         body = f'<h1><a href="{self.url}">{self.fic_cover['name']}</a></h1>\n<h2>by {self.fic_cover["author"]}</h2>\n<br>\n<br>\n'
 
-        for i in range(len(self.list)):
-            body += f"<h2>{self.list[i]["name"]}</h2>\n"
-            body += f"<h3>{self.list[i]["date"]}</h3>\n"
-            body += f"<div>{self.list[i]["content"]}</div>\n<br>\n<br>\n<br>\n"
+        for i in range(len(self.list_chap)):
+            body += f"<h2>{self.list_chap[i]["name"]}</h2>\n"
+            body += f"<h3>{self.list_chap[i]["date"]}</h3>\n"
+            body += f"<div>{self.list_chap[i]["content"]}</div>\n<br>\n<br>\n<br>\n"
 
         with open(template, "r") as template:
             html = template.read()
@@ -168,8 +167,8 @@ if __name__ == "__main__":
     #     shutil.rmtree("cache")
 
 
-    g = Downloader("https://www.royalroad.com/fiction/98242/magical-engineering-progression-fantasy-litrpg")
+    g = Downloader("https://www.royalroad.com/fiction/134167/sector-bomb")
     g.download()
     # g.to_txt()
     g.to_html()
-    # g.to_pdf()
+    g.to_pdf()

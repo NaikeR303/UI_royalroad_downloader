@@ -16,6 +16,9 @@ Parser:
             ✔ With images @done(25-10-07 00:06)
             ✔ Without images @started(25-10-06 19:00) @done(25-10-06 21:49) @lasted(2h49m3s)
         ☐ Settings
-            ☐ Color scheme
+            ☐ Color schemes
+            ☐ Mobile mode (entropy save us...)
+            ☐ PDF Separation by N
     Fixes:
-        ☐ Make PDF separate into N chapter per pdf
+        ✔ Optimize cache by not using folders @started(25-10-08 19:20) @done(25-10-08 19:30) @lasted(10m51s)
+        ✔ Remove variables from Class to Init @started(25-10-08 19:59) @done(25-10-08 20:02) @lasted(3m19s)
