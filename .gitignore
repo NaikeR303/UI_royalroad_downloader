@@ -1,6 +1,7 @@
 # Trash
 *.pdf
 *.html
+*.ui
 # Cache
 cache
 # Needed

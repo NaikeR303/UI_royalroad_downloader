@@ -19,6 +19,11 @@ Parser:
             ☐ Color schemes
             ☐ Mobile mode (entropy save us...)
             ☐ PDF Separation by N
+    UI:
+        ✔ Make UI @started(25-10-10 21:25) @done(25-10-11 21:56) @lasted(1d31m43s)
+        ☐ Add buttons and input field
+        ☐ Connect to Engine and make 'em work
+        ☐ Loading bar
     Fixes:
         ✔ Optimize cache by not using folders @started(25-10-08 19:20) @done(25-10-08 19:30) @lasted(10m51s)
         ✔ Remove variables from Class to Init @started(25-10-08 19:59) @done(25-10-08 20:02) @lasted(3m19s)
