@@ -2,7 +2,7 @@ import re, requests, bs4, time, os, shutil, weasyprint
 
 
 class Downloader:
-    def __init__(self, url):
+    def __init__(self):
         #Example
         #https://www.royalroad.com/fiction/134167/sector-bomb
 
@@ -18,6 +18,11 @@ class Downloader:
 
         self.ficton_id = None
 
+        #Cache
+        if not os.path.exists(self.cache_folder):
+            os.mkdir(self.cache_folder)
+
+    def set_url(self, url):
         #Extractin' fiction ID
         #Check if valid URL
         if re.match(r"^(https://)?(www\.)?royalroad\.com/fiction/\d+/\w+", url):
@@ -27,10 +32,6 @@ class Downloader:
         
         #Full Url
         self.url = "https://www.royalroad.com/fiction/" + self.ficton_id
-
-        #Cache
-        if not os.path.exists(self.cache_folder):
-            os.mkdir(self.cache_folder)
 
     def get_url_list(self):
         soup = bs4.BeautifulSoup(requests.get(url=self.url).content, features="html.parser")

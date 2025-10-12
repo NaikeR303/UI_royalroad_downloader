@@ -4,5 +4,6 @@
 *.ui
 # Cache
 cache
+__pycache__
 # Needed
 !html*.html

@@ -21,9 +21,10 @@ Parser:
             ☐ PDF Separation by N
     UI:
         ✔ Make UI @started(25-10-10 21:25) @done(25-10-11 21:56) @lasted(1d31m43s)
-        ☐ Add buttons and input field
+        ✔ Add buttons and input field effects @started(25-10-12 15:20) @done(25-10-12 17:54) @lasted(2h34m18s)
         ☐ Connect to Engine and make 'em work
         ☐ Loading bar
     Fixes:
         ✔ Optimize cache by not using folders @started(25-10-08 19:20) @done(25-10-08 19:30) @lasted(10m51s)
         ✔ Remove variables from Class to Init @started(25-10-08 19:59) @done(25-10-08 20:02) @lasted(3m19s)
+        ☐ Button getting bigger when outlined

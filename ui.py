@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_design2jFEqWP.ui'
+## Form generated from reading UI file 'ui_design3VfnBSq.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.0
 ##
@@ -29,7 +29,27 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
         Dialog.setSizePolicy(sizePolicy)
-        Dialog.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        Dialog.setStyleSheet(u"QDialog{\n"
+"	background-color: rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"QFrame{\n"
+"	background-color: rgba(40, 40, 40, 0);\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"	 padding: 5px 5px;\n"
+"    font-size: 16px;\n"
+"    border-radius: 12px;\n"
+"}\n"
+"QPushButton[selected=\"true\"] {\n"
+"    border: solid;\n"
+"    border-width: 2px;\n"
+"    border-color: #f25f2c;\n"
+"}\n"
+"QPushButton[selected=\"false\"] {\n"
+"    border-width: 0px;\n"
+"}")
         self.background = QLabel(Dialog)
         self.background.setObjectName(u"background")
         self.background.setGeometry(QRect(8, 8, 484, 284))
@@ -73,7 +93,7 @@ class Ui_Dialog(object):
         self.verticalFrame = QFrame(Dialog)
         self.verticalFrame.setObjectName(u"verticalFrame")
         self.verticalFrame.setGeometry(QRect(16, 113, 230, 171))
-        self.verticalFrame.setStyleSheet(u"background-color: rgb(40, 40, 40, 0);")
+        self.verticalFrame.setStyleSheet(u"")
         self.verticalLayout_2 = QVBoxLayout(self.verticalFrame)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(10, 10, 10, -1)
@@ -81,27 +101,13 @@ class Ui_Dialog(object):
         self.rr_light_button.setObjectName(u"rr_light_button")
         self.rr_light_button.setStyleSheet(u"QPushButton {\n"
 "    background-color: white;\n"
-"    border: none;\n"
 "    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #CACACA;\n"
-"    border: none;\n"
-"    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:disabled {\n"
 "    background-color: #3D3730;\n"
-"    border: none;\n"
-"    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}")
         self.rr_light_button.setAutoDefault(True)
         self.rr_light_button.setFlat(False)
@@ -112,27 +118,13 @@ class Ui_Dialog(object):
         self.rr_dark_button.setObjectName(u"rr_dark_button")
         self.rr_dark_button.setStyleSheet(u"QPushButton {\n"
 "    background-color: #131313;\n"
-"    border: none;\n"
 "    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #2D2D2D;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:disable {\n"
 "    background-color: #3D3730;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}")
         self.rr_dark_button.setFlat(False)
 
@@ -142,27 +134,13 @@ class Ui_Dialog(object):
         self.midnight_button.setObjectName(u"midnight_button")
         self.midnight_button.setStyleSheet(u"QPushButton {\n"
 "    background-color: #1A1A1A;\n"
-"    border: none;\n"
 "    color: #808080;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #333333;\n"
-"    border: none;\n"
-"    color: #808080;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:disabled {\n"
 "    background-color: #3D3730;\n"
-"    border: none;\n"
-"    color: #808080;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}")
         self.midnight_button.setFlat(False)
 
@@ -172,27 +150,13 @@ class Ui_Dialog(object):
         self.antique_button.setObjectName(u"antique_button")
         self.antique_button.setStyleSheet(u"QPushButton {\n"
 "    background-color: #9A7F5B;\n"
-"    border: none;\n"
 "    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #715C42;\n"
-"    border: none;\n"
-"    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}\n"
 "QPushButton:disabled {\n"
 "    background-color: #3D3730;\n"
-"    border: none;\n"
-"    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
 "}")
         self.antique_button.setFlat(False)
 
@@ -205,119 +169,50 @@ class Ui_Dialog(object):
         self.verticalFrame1 = QFrame(Dialog)
         self.verticalFrame1.setObjectName(u"verticalFrame1")
         self.verticalFrame1.setGeometry(QRect(254, 110, 230, 141))
-        self.verticalFrame1.setStyleSheet(u"background-color: rgb(255, 255, 255, 0);\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #585858;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
+        self.verticalFrame1.setStyleSheet(u"QPushButton {\n"
+"    background-color: #8D8D8D;\n"
+"    color: black;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #6C6C6C;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #3D3730;\n"
 "}")
         self.verticalLayout = QVBoxLayout(self.verticalFrame1)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(10, 0, 10, -1)
-        self.txt_butt = QPushButton(self.verticalFrame1)
-        self.txt_butt.setObjectName(u"txt_butt")
-        self.txt_butt.setStyleSheet(u"QPushButton {\n"
-"    background-color: #8D8D8D;\n"
-"    border: none;\n"
-"    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #6C6C6C;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"QPushButton:disabled {\n"
-"    background-color: #3D3730;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}")
-        self.txt_butt.setAutoDefault(True)
-        self.txt_butt.setFlat(False)
+        self.txt_button = QPushButton(self.verticalFrame1)
+        self.txt_button.setObjectName(u"txt_button")
+        self.txt_button.setStyleSheet(u"")
+        self.txt_button.setAutoDefault(True)
+        self.txt_button.setFlat(False)
 
-        self.verticalLayout.addWidget(self.txt_butt)
+        self.verticalLayout.addWidget(self.txt_button)
 
-        self.html_butt = QPushButton(self.verticalFrame1)
-        self.html_butt.setObjectName(u"html_butt")
-        self.html_butt.setStyleSheet(u"QPushButton {\n"
-"    background-color: #8D8D8D;\n"
-"    border: none;\n"
-"    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #6C6C6C;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"QPushButton:disabled {\n"
-"    background-color: #3D3730;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}")
-        self.html_butt.setAutoDefault(True)
-        self.html_butt.setFlat(False)
+        self.html_button = QPushButton(self.verticalFrame1)
+        self.html_button.setObjectName(u"html_button")
+        self.html_button.setStyleSheet(u"")
+        self.html_button.setAutoDefault(True)
+        self.html_button.setFlat(False)
 
-        self.verticalLayout.addWidget(self.html_butt)
+        self.verticalLayout.addWidget(self.html_button)
 
-        self.pdf_butt = QPushButton(self.verticalFrame1)
-        self.pdf_butt.setObjectName(u"pdf_butt")
-        self.pdf_butt.setStyleSheet(u"QPushButton {\n"
-"    background-color: #8D8D8D;\n"
-"    border: none;\n"
-"    color: black;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #6C6C6C;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"QPushButton:disabled {\n"
-"    background-color: #3D3730;\n"
-"    border: none;\n"
-"    color: #CFCFCF;\n"
-"    padding: 5px 5px;\n"
-"    font-size: 16px;\n"
-"    border-radius: 12px;\n"
-"}")
-        self.pdf_butt.setAutoDefault(True)
-        self.pdf_butt.setFlat(False)
+        self.pdf_button = QPushButton(self.verticalFrame1)
+        self.pdf_button.setObjectName(u"pdf_button")
+        self.pdf_button.setStyleSheet(u"")
+        self.pdf_button.setAutoDefault(True)
+        self.pdf_button.setFlat(False)
 
-        self.verticalLayout.addWidget(self.pdf_butt)
+        self.verticalLayout.addWidget(self.pdf_button)
 
 
         self.retranslateUi(Dialog)
 
         self.rr_light_button.setDefault(False)
-        self.txt_butt.setDefault(False)
-        self.html_butt.setDefault(False)
-        self.pdf_butt.setDefault(False)
+        self.txt_button.setDefault(False)
+        self.html_button.setDefault(False)
+        self.pdf_button.setDefault(False)
 
 
         QMetaObject.connectSlotsByName(Dialog)
@@ -336,8 +231,8 @@ class Ui_Dialog(object):
         self.rr_dark_button.setText(QCoreApplication.translate("Dialog", u"RR Dark", None))
         self.midnight_button.setText(QCoreApplication.translate("Dialog", u"Midnight", None))
         self.antique_button.setText(QCoreApplication.translate("Dialog", u"Antique", None))
-        self.txt_butt.setText(QCoreApplication.translate("Dialog", u"TXT File", None))
-        self.html_butt.setText(QCoreApplication.translate("Dialog", u"HTML File - BEST!", None))
-        self.pdf_butt.setText(QCoreApplication.translate("Dialog", u"PDF File", None))
+        self.txt_button.setText(QCoreApplication.translate("Dialog", u"TXT File", None))
+        self.html_button.setText(QCoreApplication.translate("Dialog", u"HTML File - BEST!", None))
+        self.pdf_button.setText(QCoreApplication.translate("Dialog", u"PDF File", None))
     # retranslateUi
 
