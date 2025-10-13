@@ -6,4 +6,5 @@
 cache
 __pycache__
 # Needed
-!html*.html
+!templates/html/*.html
+!templates/pdf/*.html

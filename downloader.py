@@ -138,7 +138,7 @@ class Downloader:
             for c in content:
                 file.write(c + "\n")
 
-    def _create_html(self, template = "html_template_1.html"):
+    def _create_html(self, template):
         body = f'<h1><a href="{self.url}">{self.fic_cover['name']}</a></h1>\n<h2>by {self.fic_cover["author"]}</h2>\n<br>\n<br>\n'
 
         for i in range(len(self.list_chap)):
@@ -152,14 +152,14 @@ class Downloader:
 
         return html
             
-    def to_html(self):
+    def to_html(self, template):
         with open(self._get_filename(self.fic_cover["name"]) + ".html", "w") as file:
-            file.write(self._create_html(template="html_template_1.html"))
+            file.write(self._create_html(template=template))
 
-    def to_pdf(self, output = True): #TODO: Split into files by 100 chapters
+    def to_pdf(self, template, output = True): #TODO: Split into files by 100 chapters
         if output:
             print("Creating PDF file, it'll take some time. Please wait...")
-        html = weasyprint.HTML(string=self._create_html(template="html_template_2.html"))
+        html = weasyprint.HTML(string=self._create_html(template=template))
         html.write_pdf(self._get_filename(self.fic_cover["name"]) + ".pdf")
 
 
@@ -168,8 +168,10 @@ if __name__ == "__main__":
     #     shutil.rmtree("cache")
 
 
-    g = Downloader("https://www.royalroad.com/fiction/134167/sector-bomb")
+    g = Downloader()
+    g.set_url("https://www.royalroad.com/fiction/134167/sector-bomb")
+    g.get_url_list()
     g.download()
     # g.to_txt()
-    g.to_html()
-    g.to_pdf()
+    g.to_html("templates/html/antique.html")
+    # g.to_pdf()

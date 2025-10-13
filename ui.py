@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_design3VfnBSq.ui'
+## Form generated from reading UI file 'ui_design3QypFXE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.0
 ##
@@ -47,8 +47,8 @@ class Ui_Dialog(object):
 "    border-width: 2px;\n"
 "    border-color: #f25f2c;\n"
 "}\n"
-"QPushButton[selected=\"false\"] {\n"
-"    border-width: 0px;\n"
+"QPushButton[selected=\"\"] {\n"
+"    border:  none;\n"
 "}")
         self.background = QLabel(Dialog)
         self.background.setObjectName(u"background")
@@ -149,11 +149,11 @@ class Ui_Dialog(object):
         self.antique_button = QPushButton(self.verticalFrame)
         self.antique_button.setObjectName(u"antique_button")
         self.antique_button.setStyleSheet(u"QPushButton {\n"
-"    background-color: #9A7F5B;\n"
-"    color: black;\n"
+"    background-color: #af926d;\n"
+"    color: #52331e;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #715C42;\n"
+"    background-color: #8E7657;\n"
 "}\n"
 "QPushButton:disabled {\n"
 "    background-color: #3D3730;\n"
