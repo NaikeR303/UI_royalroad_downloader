@@ -7,7 +7,7 @@ Parser:
         ✔ Cache @done(25-10-06 01:47)
             ✔ With checking cache @done(25-10-06 01:47)
             ✔ Withoug checking cache @started(25-10-05 16:22) @done(25-10-05 20:28) @lasted(4h6m46s)
-        ☐ Make download counter for output
+        ☐ Make download counter for output @started(25-10-13 17:48)
     Formatter:
         ✔ To TXT @started(25-10-04 20:25) @done(25-10-04 23:51) @lasted(3h26m26s)
         ✔ To PDF @done(25-10-07 00:06)
@@ -18,12 +18,12 @@ Parser:
             ✔ Without images @started(25-10-06 19:00) @done(25-10-06 21:49) @lasted(2h49m3s)
         ☐ Settings
             ✔ Color schemes @started(25-10-12 18:47) @done(25-10-13 15:45) @lasted(20h58m43s)
-            ☐ Mobile mode (entropy save us...)
+            ✘ Mobile mode (entropy save us...) @cancelled(25-10-13 17:47)
             ☐ PDF Separation by N
     UI:
         ✔ Make UI @started(25-10-10 21:25) @done(25-10-11 21:56) @lasted(1d31m43s)
         ✔ Add buttons and input field effects @started(25-10-12 15:20) @done(25-10-12 17:54) @lasted(2h34m18s)
-        ☐ Connect to Engine and make 'em work
+        ✔ Connect to Engine and make 'em work @started(25-10-13 15:52) @done(25-10-13 17:46) @lasted(1h54m39s)
         ☐ Loading bar
     Fixes:
         ✔ Optimize cache by not using folders @started(25-10-08 19:20) @done(25-10-08 19:30) @lasted(10m51s)

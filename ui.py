@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_design3QypFXE.ui'
+## Form generated from reading UI file 'ui_design4GJUtlH.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.0
 ##
@@ -153,7 +153,7 @@ class Ui_Dialog(object):
 "    color: #52331e;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #8E7657;\n"
+"    background-color: #715C42;\n"
 "}\n"
 "QPushButton:disabled {\n"
 "    background-color: #3D3730;\n"
@@ -177,7 +177,7 @@ class Ui_Dialog(object):
 "    background-color: #6C6C6C;\n"
 "}\n"
 "QPushButton:disabled {\n"
-"    background-color: #3D3730;\n"
+"    background-color: #363636;\n"
 "}")
         self.verticalLayout = QVBoxLayout(self.verticalFrame1)
         self.verticalLayout.setObjectName(u"verticalLayout")

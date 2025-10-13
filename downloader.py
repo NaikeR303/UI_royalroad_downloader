@@ -6,6 +6,8 @@ class Downloader:
         #Example
         #https://www.royalroad.com/fiction/134167/sector-bomb
 
+        self.debug = False
+
         #Variables
         self.fic_cover = {}
         self.list_chap = []
@@ -65,7 +67,7 @@ class Downloader:
 
         return self.list_chap
     
-    def download(self, output = True):
+    def download(self):
         if not self.list_chap:
             self.get_url_list()
 
@@ -92,10 +94,10 @@ class Downloader:
             
 
             if chap_id in self.list_d:
-                if output:
+                if self.debug:
                     print(f"{self.list_chap[i]["name"]} is already downloaded! ({i+1}/{len(self.list_chap)})")
             else:
-                if output:
+                if self.debug:
                     print(f"Downloaded {self.list_chap[i]["name"]} ({i+1}/{len(self.list_chap)})")
 
                 #A bit of wait to not get banned
@@ -156,9 +158,10 @@ class Downloader:
         with open(self._get_filename(self.fic_cover["name"]) + ".html", "w") as file:
             file.write(self._create_html(template=template))
 
-    def to_pdf(self, template, output = True): #TODO: Split into files by 100 chapters
-        if output:
+    def to_pdf(self, template): #TODO: Split into files by 100 chapters
+        if self.debug:
             print("Creating PDF file, it'll take some time. Please wait...")
+            
         html = weasyprint.HTML(string=self._create_html(template=template))
         html.write_pdf(self._get_filename(self.fic_cover["name"]) + ".pdf")
 

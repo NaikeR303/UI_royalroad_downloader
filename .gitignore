@@ -2,6 +2,7 @@
 *.pdf
 *.html
 *.ui
+*.txt
 # Cache
 cache
 __pycache__
