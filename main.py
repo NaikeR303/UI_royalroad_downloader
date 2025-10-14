@@ -1,9 +1,14 @@
 import sys
 from threading import Thread
-from PySide6.QtCore import QTimer
-from PySide6.QtWidgets import QApplication, QDialog
+from PySide6.QtCore import QTimer, QObject, Signal
+from PySide6.QtWidgets import QApplication, QDialog, QMessageBox
 from ui import Ui_Dialog
 from downloader import Downloader
+
+
+class NotificationSignal(QObject):
+    notify_signal = Signal(str)
+
 
 class RoyalRoadDownloader(QDialog, Ui_Dialog):
     def __init__(self):
@@ -13,6 +18,10 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         self.txt_button.setEnabled(False)
         self.html_button.setEnabled(False)
         self.pdf_button.setEnabled(False)        
+
+        #Signal
+        self.signal = NotificationSignal()
+        self.signal.notify_signal.connect(self._notify)
         
         #Load bar update
         self.timer = QTimer()
@@ -33,6 +42,14 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         self.pdf_button.clicked.connect(self.pdf_bttn)
 
         self.downloader = Downloader()
+
+    def _notify(self, message):
+        msg = QMessageBox()
+        msg.setWindowTitle("Downloader")
+        msg.setText(message)
+        msg.setIcon(QMessageBox.Information)
+        QApplication.beep()
+        msg.exec()
 
     def _switch_button(self, button):
         #Enabling download buttons
@@ -87,6 +104,11 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         self.downloader.set_url(self.urlLine.text())
         self.downloader.get_url_list()
         self.downloader.download()
+    
+    def _download_finish(self):
+        self.progressBar.setValue(100)
+
+        self.signal.notify_signal.emit("Downloading finished!")
 
     def txt_bttn(self):
         self.timer.start(100)
@@ -94,6 +116,8 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         def thread():
             self._download_bttn()
             self.downloader.to_txt()
+
+            self._download_finish()
 
         Thread(target=thread).start()
 
@@ -112,6 +136,8 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
             elif self.antique_button.property("selected") == True:
                 self.downloader.to_html("templates/html/antique.html")
 
+            self._download_finish()
+
         Thread(target=thread).start()
 
     def pdf_bttn(self):
@@ -129,15 +155,17 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
             elif self.antique_button.property("selected") == True:
                 self.downloader.to_pdf("templates/pdf/antique.html")
 
+            self._download_finish()
+
         Thread(target=thread).start()
 
 
     def update_bar(self):
         if self.downloader.chap_downloaded != 0:
-            self.progressBar.setValue((self.downloader.chap_downloaded / self.downloader.chap_num) * 100)
+            self.progressBar.setValue((self.downloader.chap_downloaded / self.downloader.chap_num) * 99)
 
             if self.downloader.chap_num == self.downloader.chap_downloaded:
-                self.progressBar.setValue(100)
+                self.progressBar.setValue(99)
                 self.timer.stop()
         else:
             self.progressBar.setValue(0)
