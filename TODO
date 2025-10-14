@@ -25,7 +25,10 @@ Parser:
         ✔ Add buttons and input field effects @started(25-10-12 15:20) @done(25-10-12 17:54) @lasted(2h34m18s)
         ✔ Connect to Engine and make 'em work @started(25-10-13 15:52) @done(25-10-13 17:46) @lasted(1h54m39s)
         ☐ Loading bar
+        ☐ Notify when ended
     Fixes:
         ✔ Optimize cache by not using folders @started(25-10-08 19:20) @done(25-10-08 19:30) @lasted(10m51s)
         ✔ Remove variables from Class to Init @started(25-10-08 19:59) @done(25-10-08 20:02) @lasted(3m19s)
         ☐ Fix button getting bigger when outlined
+        ☐ Make buttons change color gradually 
+        ☐ Make a log

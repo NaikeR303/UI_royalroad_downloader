@@ -1,4 +1,6 @@
 import sys
+from threading import Thread
+from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication, QDialog
 from ui import Ui_Dialog
 from downloader import Downloader
@@ -12,7 +14,11 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         self.html_button.setEnabled(False)
         self.pdf_button.setEnabled(False)        
         
+        #Load bar update
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.update_bar)
 
+        #Setup
         self.progressBar.setValue(0)
         self.urlLine.setText("https://www.royalroad.com/fiction/51893/the-heart-grows")
         self.urlLine.setText("https://www.royalroad.com/fiction/134167/sector-bomb")
@@ -83,33 +89,58 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         self.downloader.download()
 
     def txt_bttn(self):
-        self._download_bttn()
-        self.downloader.to_txt()
+        self.timer.start(100)
+        
+        def thread():
+            self._download_bttn()
+            self.downloader.to_txt()
+
+        Thread(target=thread).start()
 
     def html_bttn(self):
-        self._download_bttn()
+        self.timer.start(100)
 
-        if self.rr_light_button.property("selected") == True:
-            self.downloader.to_html("templates/html/light.html")
-        elif self.rr_dark_button.property("selected") == True:
-            self.downloader.to_html("templates/html/dark.html")
-        elif self.midnight_button.property("selected") == True:
-            self.downloader.to_html("templates/html/midnight.html")
-        elif self.antique_button.property("selected") == True:
-            self.downloader.to_html("templates/html/antique.html")
+        def thread():
+            self._download_bttn()
 
+            if self.rr_light_button.property("selected") == True:
+                self.downloader.to_html("templates/html/light.html")
+            elif self.rr_dark_button.property("selected") == True:
+                self.downloader.to_html("templates/html/dark.html")
+            elif self.midnight_button.property("selected") == True:
+                self.downloader.to_html("templates/html/midnight.html")
+            elif self.antique_button.property("selected") == True:
+                self.downloader.to_html("templates/html/antique.html")
+
+        Thread(target=thread).start()
 
     def pdf_bttn(self):
-        self._download_bttn()
+        self.timer.start(100)
 
-        if self.rr_light_button.property("selected") == True:
-            self.downloader.to_pdf("templates/pdf/light.html")
-        elif self.rr_dark_button.property("selected") == True:
-            self.downloader.to_pdf("templates/pdf/dark.html")
-        elif self.midnight_button.property("selected") == True:
-            self.downloader.to_pdf("templates/pdf/midnight.html")
-        elif self.antique_button.property("selected") == True:
-            self.downloader.to_pdf("templates/pdf/antique.html")
+        def thread():
+            self._download_bttn()
+
+            if self.rr_light_button.property("selected") == True:
+                self.downloader.to_pdf("templates/pdf/light.html")
+            elif self.rr_dark_button.property("selected") == True:
+                self.downloader.to_pdf("templates/pdf/dark.html")
+            elif self.midnight_button.property("selected") == True:
+                self.downloader.to_pdf("templates/pdf/midnight.html")
+            elif self.antique_button.property("selected") == True:
+                self.downloader.to_pdf("templates/pdf/antique.html")
+
+        Thread(target=thread).start()
+
+
+    def update_bar(self):
+        if self.downloader.chap_downloaded != 0:
+            self.progressBar.setValue((self.downloader.chap_downloaded / self.downloader.chap_num) * 100)
+
+            if self.downloader.chap_num == self.downloader.chap_downloaded:
+                self.progressBar.setValue(100)
+                self.timer.stop()
+        else:
+            self.progressBar.setValue(0)
 
 app = QApplication(sys.argv)
 

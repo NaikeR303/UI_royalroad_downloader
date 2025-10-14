@@ -15,6 +15,9 @@ class Downloader:
 
         self.redownload = False
 
+        self.chap_num = 0
+        self.chap_downloaded = 0
+
         self.cache_folder = "cache"
         self.fic_folder = None
 
@@ -65,6 +68,8 @@ class Downloader:
             shutil.rmtree(self.fic_folder)
             os.mkdir(self.fic_folder)
 
+        self.chap_num = len(self.list_chap)
+
         return self.list_chap
     
     def download(self):
@@ -74,7 +79,7 @@ class Downloader:
         #Checking cache
         self.list_d = os.listdir(self.fic_folder)
         
-        for i in range(len(self.list_chap)):
+        for i in range(self.chap_num):
             chap_id = re.findall(r'\d+', self.list_chap[i]["url"])[1]
             chap_file = self.fic_folder + "/" + chap_id
 
@@ -95,15 +100,16 @@ class Downloader:
 
             if chap_id in self.list_d:
                 if self.debug:
-                    print(f"{self.list_chap[i]["name"]} is already downloaded! ({i+1}/{len(self.list_chap)})")
+                    print(f"{self.list_chap[i]["name"]} is already downloaded! ({i+1}/{self.chap_num})")
             else:
                 if self.debug:
-                    print(f"Downloaded {self.list_chap[i]["name"]} ({i+1}/{len(self.list_chap)})")
+                    print(f"Downloaded {self.list_chap[i]["name"]} ({i+1}/{self.chap_num})")
 
                 #A bit of wait to not get banned
                 time.sleep(0.5)
-            
-        return self.list_chap
+
+            #Number downloaded
+            self.chap_downloaded = i+1
     
     def _get_text(self, content):
         #Get text from chapter in array
@@ -161,7 +167,7 @@ class Downloader:
     def to_pdf(self, template): #TODO: Split into files by 100 chapters
         if self.debug:
             print("Creating PDF file, it'll take some time. Please wait...")
-            
+
         html = weasyprint.HTML(string=self._create_html(template=template))
         html.write_pdf(self._get_filename(self.fic_cover["name"]) + ".pdf")
 
