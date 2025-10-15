@@ -41,7 +41,8 @@ class Downloader:
     def get_url_list(self):
         #resetting 
         self.list_chap = []
-        
+        self.chap_num = 0
+        self.chap_downloaded = 0
         
         soup = bs4.BeautifulSoup(requests.get(url=self.url).content, features="html.parser")
 
