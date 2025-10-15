@@ -9,3 +9,4 @@ __pycache__
 # Needed
 !templates/html/*.html
 !templates/pdf/*.html
+!requirements.txt
