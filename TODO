@@ -25,11 +25,13 @@ Parser:
         ✔ Add buttons and input field effects @started(25-10-12 15:20) @done(25-10-12 17:54) @lasted(2h34m18s)
         ✔ Connect to Engine and make 'em work @started(25-10-13 15:52) @done(25-10-13 17:46) @lasted(1h54m39s)
         ✔ Loading bar @done(25-10-14 13:51)
-        ☐ Notify when ended @started(25-10-14 13:51)
+        ✔ Notify when ended @started(25-10-14 13:51) @done(25-10-14 19:06) @lasted(5h15m13s)
     Fixes:
         ✔ Optimize cache by not using folders @started(25-10-08 19:20) @done(25-10-08 19:30) @lasted(10m51s)
         ✔ Remove variables from Class to Init @started(25-10-08 19:59) @done(25-10-08 20:02) @lasted(3m19s)
         ☐ Fix button getting bigger when outlined
-        ☐ Make buttons change color gradually 
+        ✘ Make buttons change color gradually @cancelled(25-10-14 19:35)
         ☐ Make a log
         ☐ Make code review
+        ✔ Fix buttons not locking during download @done(25-10-14 23:45)
+        ☐ Fix progress bar not updating during second download

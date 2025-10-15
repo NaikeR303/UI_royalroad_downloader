@@ -39,6 +39,10 @@ class Downloader:
         self.url = "https://www.royalroad.com/fiction/" + self.ficton_id
 
     def get_url_list(self):
+        #resetting 
+        self.list_chap = []
+        
+        
         soup = bs4.BeautifulSoup(requests.get(url=self.url).content, features="html.parser")
 
         #URL list
