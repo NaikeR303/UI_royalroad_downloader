@@ -34,4 +34,4 @@ Parser:
         ☐ Make a log
         ☐ Make code review
         ✔ Fix buttons not locking during download @done(25-10-14 23:45)
-        ☐ Fix progress bar not updating during second download
+        ✔ Fix progress bar not updating during second download @done(25-10-15 18:15)

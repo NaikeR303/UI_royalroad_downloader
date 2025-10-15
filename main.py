@@ -181,8 +181,6 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
 
 
     def update_bar(self):
-        print(f"update called! {self.downloader.chap_downloaded}")
-
         if self.downloader.chap_downloaded != 0:
             if self.downloader.chap_num == self.downloader.chap_downloaded:
                 self.timer.stop()
@@ -192,8 +190,8 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
             self.progressBar.setValue(0)
 
 #Debug
-import shutil
-shutil.rmtree("cache")
+# import shutil
+# shutil.rmtree("cache")
 
 #Main
 app = QApplication(sys.argv)
