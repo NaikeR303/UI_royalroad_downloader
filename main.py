@@ -33,7 +33,7 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         #Setup
         self.progressBar.setValue(0)
         self.urlLine.setText("https://www.royalroad.com/fiction/51893/the-heart-grows")
-        self.urlLine.setText("https://www.royalroad.com/fiction/134167/sector-bomb")
+        # self.urlLine.setText("https://www.royalroad.com/fiction/134167/sector-bomb")
 
         self.rr_light_button.clicked.connect(self.rr_light_bttn)
         self.rr_dark_button.clicked.connect(self.rr_dark_bttn)
