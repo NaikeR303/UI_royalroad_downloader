@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from threading import Thread
 from PySide6.QtCore import QTimer, QObject, Signal
 from PySide6.QtWidgets import QApplication, QDialog, QMessageBox
@@ -124,6 +124,12 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         self._enable_download()
         self.progressBar.setValue(100)
 
+    def _get_base_path(self):
+        if hasattr(sys, '_MEIPASS'):              #Pyinstaller
+            return sys._MEIPASS
+        else:                                     #not Pyinstaller
+            return os.path.abspath(".")
+
     def txt_bttn(self):
         self.timer.start(100)
         
@@ -146,13 +152,13 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
             self._download_bttn()
 
             if self.rr_light_button.property("selected") == True:
-                self.downloader.to_html("templates/html/light.html")
+                self.downloader.to_html(self._get_base_path() + "/templates/html/light.html")
             elif self.rr_dark_button.property("selected") == True:
-                self.downloader.to_html("templates/html/dark.html")
+                self.downloader.to_html(self._get_base_path() + "/templates/html/dark.html")
             elif self.midnight_button.property("selected") == True:
-                self.downloader.to_html("templates/html/midnight.html")
+                self.downloader.to_html(self._get_base_path() + "/templates/html/midnight.html")
             elif self.antique_button.property("selected") == True:
-                self.downloader.to_html("templates/html/antique.html")
+                self.downloader.to_html(self._get_base_path() + "/templates/html/antique.html")
 
             self._signal_finish()
 
@@ -167,13 +173,13 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
             self._download_bttn()
 
             if self.rr_light_button.property("selected") == True:
-                self.downloader.to_pdf("templates/pdf/light.html")
+                self.downloader.to_pdf(self._get_base_path() + "/templates/pdf/light.html")
             elif self.rr_dark_button.property("selected") == True:
-                self.downloader.to_pdf("templates/pdf/dark.html")
+                self.downloader.to_pdf(self._get_base_path() + "/templates/pdf/dark.html")
             elif self.midnight_button.property("selected") == True:
-                self.downloader.to_pdf("templates/pdf/midnight.html")
+                self.downloader.to_pdf(self._get_base_path() + "/templates/pdf/midnight.html")
             elif self.antique_button.property("selected") == True:
-                self.downloader.to_pdf("templates/pdf/antique.html")
+                self.downloader.to_pdf(self._get_base_path() + "/templates/pdf/antique.html")
 
             self._signal_finish()
 

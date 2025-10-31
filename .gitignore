@@ -3,6 +3,11 @@
 *.html
 *.ui
 *.txt
+*.sh
+*.spec
+build*
+dist
+venv*
 # Cache
 cache
 __pycache__
@@ -10,3 +15,4 @@ __pycache__
 !templates/html/*.html
 !templates/pdf/*.html
 !requirements.txt
+!builds
