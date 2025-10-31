@@ -25,7 +25,8 @@ A download utility for archiving content from [RoyalRoad](https://www.royalroad.
 ## Installation
 
 ### Option 1: Executables
-TODO
+[Linux](builds/rr_downloader)
+[Windows](builds/rr_downloader.exe)
 
 ### Option 2: From Source
 
