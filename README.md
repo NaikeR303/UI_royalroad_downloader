@@ -1,32 +1,39 @@
 # RoyalRoad Downloader with UI
-A download utility for archiving content from [RoyalRoad](https://www.royalroad.com/). Exports stories and books in three formats (TXT, HTML, PDF) with four color theme choices (Light, Dark, Midnight, Antique). With UI.
+A download utility for archiving content from [RoyalRoad](https://www.royalroad.com/). 
+
+Exports stories and books in three formats (TXT, HTML, PDF) with four color theme choices (Light, Dark, Midnight, Antique). With UI.
 
 ## Supported Formats
 - `.txt` - Plain text
 - `.html` - Web page
 - `.pdf` - Portable Document Format
-- Other formats may be added in future if required
+
+Other formats may be added in future if requested
 
 ## Color Themes
 - **Light** - Standard light theme
 - **Dark** - RoyalRoad's dark theme
 - **Midnight** - Dark theme with low contrast (recommended for reading)
 - **Antique** - Sepia/old paper theme
-- Other themes may be added in future if required
+
+Other themes may be added in future if requested
 
 ## Requirements
 - Python 3.10 or higher
-- Required Python packages:
+- Main required Python packages:
   - BeautifulSoup4
   - WeasyPrint
   - Requests
   - PySide6 (Qt for Python)
 
+[(look for full list in requirements.txt)](/requirements.txt)
+
 ## Installation
 
 ### Option 1: Executables
-[Linux](builds/rr_downloader)
-[Windows](builds/rr_downloader.exe)
+Look for Linux and Windows executables in [releases](https://github.com/NaikeR303/UI_royalroad_downloader/releases)
+
+Should work by itself without any additional packages and libraries 
 
 ### Option 2: From Source
 
@@ -77,7 +84,7 @@ python main.py
 2. **Select Theme**: Choose from one of the four color themes
 3. **Choose Format**: Click your preferred download format button
 4. **Wait for Completion**: A popup will notify you when download finishes
-5. **Find File**: Check the download directory for your exported file
+5. **Find File**: Check the directory with `main.py` or executable for your exported file
 
 ## License
 MIT License

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_design4GJUtlH.ui'
+## Form generated from reading UI file 'ui_design5DXAzCS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.0
 ##
@@ -15,15 +15,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QLabel,
-    QLineEdit, QProgressBar, QPushButton, QSizePolicy,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QDialog, QFrame,
+    QGridLayout, QLabel, QLineEdit, QProgressBar,
+    QPushButton, QRadioButton, QSizePolicy, QVBoxLayout,
+    QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(500, 300)
+        Dialog.resize(500, 410)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -52,7 +53,7 @@ class Ui_Dialog(object):
 "}")
         self.background = QLabel(Dialog)
         self.background.setObjectName(u"background")
-        self.background.setGeometry(QRect(8, 8, 484, 284))
+        self.background.setGeometry(QRect(8, 8, 484, 394))
         self.background.setStyleSheet(u"background-color: rgb(23, 23, 23);\n"
 "border-radius: 12px;")
         self.label = QLabel(Dialog)
@@ -206,6 +207,74 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.pdf_button)
 
+        self.background_4 = QLabel(Dialog)
+        self.background_4.setObjectName(u"background_4")
+        self.background_4.setGeometry(QRect(16, 290, 351, 104))
+        self.background_4.setStyleSheet(u"background-color: rgb(40, 40, 40);\n"
+"border-radius: 12px;")
+        self.label_4 = QLabel(Dialog)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setGeometry(QRect(130, 290, 161, 41))
+        self.label_4.setFont(font)
+        self.label_4.setStyleSheet(u"color: rgb(194, 194, 194);\n"
+"background-color: rgb(40, 40, 40);")
+        self.stop_button = QPushButton(Dialog)
+        self.stop_button.setObjectName(u"stop_button")
+        self.stop_button.setGeometry(QRect(373, 290, 111, 104))
+        self.stop_button.setStyleSheet(u"QPushButton{\n"
+"	background-color: #f15e2a;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	background-color: #f1412a;\n"
+"}\n"
+"")
+        self.gridFrame = QFrame(Dialog)
+        self.gridFrame.setObjectName(u"gridFrame")
+        self.gridFrame.setGeometry(QRect(26, 323, 341, 61))
+        self.gridFrame.setStyleSheet(u"QRadioButton::indicator::unchecked{\n"
+"	background-color: #a3a3a3;\n"
+"	border-radius: 6px;\n"
+"}\n"
+"QRadioButton::indicator::checked{\n"
+"	background-color: #f15e2a;\n"
+"	border-radius: 6px;\n"
+"	border: 2px solid #a3a3a3;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator::unchecked{\n"
+"	background-color: #a3a3a3;\n"
+"	border-radius: 2px;\n"
+"}\n"
+"QCheckBox::indicator::checked{\n"
+"	background-color: #f15e2a;\n"
+"	border-radius: 2px;\n"
+"	border: 2px solid #a3a3a3;\n"
+"}")
+        self.gridLayout = QGridLayout(self.gridFrame)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.mobile_box = QCheckBox(self.gridFrame)
+        self.mobile_box.setObjectName(u"mobile_box")
+        self.mobile_box.setChecked(False)
+
+        self.gridLayout.addWidget(self.mobile_box, 1, 1, 1, 1)
+
+        self.pdf_box = QCheckBox(self.gridFrame)
+        self.pdf_box.setObjectName(u"pdf_box")
+
+        self.gridLayout.addWidget(self.pdf_box, 2, 1, 1, 1)
+
+        self.delete_check = QRadioButton(self.gridFrame)
+        self.delete_check.setObjectName(u"delete_check")
+
+        self.gridLayout.addWidget(self.delete_check, 2, 0, 1, 1)
+
+        self.update_check = QRadioButton(self.gridFrame)
+        self.update_check.setObjectName(u"update_check")
+        self.update_check.setChecked(True)
+
+        self.gridLayout.addWidget(self.update_check, 1, 0, 1, 1)
+
 
         self.retranslateUi(Dialog)
 
@@ -234,5 +303,12 @@ class Ui_Dialog(object):
         self.txt_button.setText(QCoreApplication.translate("Dialog", u"TXT File", None))
         self.html_button.setText(QCoreApplication.translate("Dialog", u"HTML File - BEST!", None))
         self.pdf_button.setText(QCoreApplication.translate("Dialog", u"PDF File", None))
+        self.background_4.setText("")
+        self.label_4.setText(QCoreApplication.translate("Dialog", u"Choose settings", None))
+        self.stop_button.setText(QCoreApplication.translate("Dialog", u"STOP", None))
+        self.mobile_box.setText(QCoreApplication.translate("Dialog", u"Mobile mode", None))
+        self.pdf_box.setText(QCoreApplication.translate("Dialog", u"Separate PDF into files", None))
+        self.delete_check.setText(QCoreApplication.translate("Dialog", u"Delete cache", None))
+        self.update_check.setText(QCoreApplication.translate("Dialog", u"Update cache", None))
     # retranslateUi
 
