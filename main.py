@@ -32,8 +32,11 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
 
         #Setup
         self.progressBar.setValue(0)
-        # self.urlLine.setText("https://www.royalroad.com/fiction/51893/the-heart-grows")
-        self.urlLine.setText("https://www.royalroad.com/fiction/134167/sector-bomb")
+        self.urlLine.setText("https://www.royalroad.com/fiction/51893/the-heart-grows")
+        # self.urlLine.setText("https://www.royalroad.com/fiction/134167/sector-bomb")
+
+        self.progressBar.setTextVisible(True)    #To make sure the label is drawn
+        self.progressBar.setFormat("")
 
         self.rr_light_button.clicked.connect(self.rr_light_bttn)
         self.rr_dark_button.clicked.connect(self.rr_dark_bttn)
@@ -120,6 +123,7 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         self.downloader.download()
     
     def _signal_finish(self):
+        self.progressBar.setFormat("Done! - %p%")
         self.signal.finished_download.emit()
         self.signal.notify_signal.emit("Downloading finished!")
 
@@ -175,6 +179,8 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         def thread():
             self._download_bttn()
 
+            self.progressBar.setFormat("Creating PDF... - %p%")
+
             if self.rr_light_button.property("selected") == True:
                 self.downloader.to_pdf(self._get_base_path() + "/templates/pdf/light.html")
             elif self.rr_dark_button.property("selected") == True:
@@ -194,8 +200,10 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
             if self.downloader.chap_num == self.downloader.chap_downloaded:
                 self.timer.stop()
             else:
+                self.progressBar.setFormat(f"Downloading {self.downloader.chap_downloaded}/{self.downloader.chap_num} - %p%")
                 self.progressBar.setValue((self.downloader.chap_downloaded / self.downloader.chap_num) * 99)
         else:
+            self.progressBar.setFormat("")
             self.progressBar.setValue(0)
 
 #Debug
