@@ -1,4 +1,4 @@
-import re, requests, bs4, time, os, shutil, weasyprint
+import re, requests, bs4, time, os, shutil, weasyprint, logging, sys
 
 
 class Downloader:
@@ -6,7 +6,7 @@ class Downloader:
         #Example
         #https://www.royalroad.com/fiction/134167/sector-bomb
 
-        self.debug = False
+        self.debug = True
 
         #Variables
         self.fic_cover = {}
@@ -14,6 +14,9 @@ class Downloader:
         self.list_d = []
 
         self.redownload = False
+        self.update_cache = False
+        self.is_mobile = False
+        self.separate = False
 
         self.chap_num = 0
         self.chap_downloaded = 0
@@ -23,9 +26,24 @@ class Downloader:
 
         self.ficton_id = None
 
+        #Creating log file
+        open("app.log", "w").close()
+
+        logging.basicConfig(filename='app.log', 
+                            level=logging.DEBUG, 
+                            filemode="a",
+                            format='[%(asctime)s | %(levelname)s] %(message)s')
+
+        def log_except_hook(excType, excValue, traceback):
+            logging.critical("Uncaught exception",
+                            exc_info=(excType, excValue, traceback))
+
+        sys.excepthook = log_except_hook     # <-- plug it in
+
         #Cache
         if not os.path.exists(self.cache_folder):
             os.mkdir(self.cache_folder)
+
 
     def set_url(self, url):
         #Extractin' fiction ID
@@ -44,10 +62,10 @@ class Downloader:
         self.chap_num = 0
         self.chap_downloaded = 0
         
-        soup = bs4.BeautifulSoup(requests.get(url=self.url).content, features="html.parser")
+        self.soup = bs4.BeautifulSoup(requests.get(url=self.url).content, features="html.parser")
 
         #URL list
-        for row in soup.find_all(class_ = "chapter-row"):
+        for row in self.soup.find_all(class_ = "chapter-row"):
             chapter = {}
 
             table_chap = row.find_all("a")
@@ -59,10 +77,16 @@ class Downloader:
 
             self.list_chap.append(chapter)
 
+        return self.list_chap
+    
+    def download(self):
+        if not self.list_chap:
+            self.get_url_list()
+
         #Name, author
         #TODO: Image 
-        self.fic_cover["name"] = soup.find(class_ = "fic-title").find("h1").text
-        self.fic_cover["author"] = soup.find(class_ = "mt-card-content").find("h3").text.strip()
+        self.fic_cover["name"] = self.soup.find(class_ = "fic-title").find("h1").text
+        self.fic_cover["author"] = self.soup.find(class_ = "mt-card-content").find("h3").text.strip()
 
         #Cache
         self.fic_folder = self.cache_folder + "/" + self.ficton_id
@@ -75,12 +99,6 @@ class Downloader:
 
         self.chap_num = len(self.list_chap)
 
-        return self.list_chap
-    
-    def download(self):
-        if not self.list_chap:
-            self.get_url_list()
-
         #Checking cache
         self.list_d = os.listdir(self.fic_folder)
         
@@ -88,27 +106,26 @@ class Downloader:
             chap_id = re.findall(r'\d+', self.list_chap[i]["url"])[1]
             chap_file = self.fic_folder + "/" + chap_id
 
+
             #Reading cache or downloading
-            if chap_id in self.list_d:
-                with open(chap_file, "r") as file:
-                    self.list_chap[i]["content"] = file.read()
-            else:
+            if chap_id not in self.list_d or self.update_cache:
                 soup = bs4.BeautifulSoup(requests.get(url=self.list_chap[i]["url"]).content, features="html.parser")
                 text = soup.find("div", class_="chapter-inner chapter-content").contents
                 self.list_chap[i]["content"] = "".join(str(item) for item in text).strip()
+            else:
+                with open(chap_file, "r") as file:
+                    self.list_chap[i]["content"] = file.read()
 
             #Creating cache
-            if not os.path.exists(chap_file):     
+            if not os.path.exists(chap_file) or self.update_cache:     
                 with open(chap_file, "w") as file:
                     file.write(self.list_chap[i]["content"])
             
 
-            if chap_id in self.list_d:
-                if self.debug:
-                    print(f"{self.list_chap[i]["name"]} is already downloaded! ({i+1}/{self.chap_num})")
+            if chap_id in self.list_d and not self.update_cache:
+                logging.info(f"{self.list_chap[i]["name"]} is already downloaded! ({i+1}/{self.chap_num})")
             else:
-                if self.debug:
-                    print(f"Downloaded {self.list_chap[i]["name"]} ({i+1}/{self.chap_num})")
+                logging.info(f"Downloaded {self.list_chap[i]["name"]} ({i+1}/{self.chap_num})")
 
                 #A bit of wait to not get banned
                 time.sleep(0.5)
@@ -171,7 +188,7 @@ class Downloader:
 
     def to_pdf(self, template): #TODO: Split into files by 100 chapters
         if self.debug:
-            print("Creating PDF file, it'll take some time. Please wait...")
+            logging.info("Creating PDF file, it'll take some time. Please wait...")
 
         html = weasyprint.HTML(string=self._create_html(template=template))
         html.write_pdf(self._get_filename(self.fic_cover["name"]) + ".pdf")

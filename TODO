@@ -8,6 +8,9 @@ Parser:
             ✔ With checking cache @done(25-10-06 01:47)
             ✔ Withoug checking cache @started(25-10-05 16:22) @done(25-10-05 20:28) @lasted(4h6m46s)
         ✔ Make download counter for output @started(25-10-13 17:48) @done(25-10-14 13:51) @lasted(20h3m46s)
+        ✔ Cache deletion @done(25-11-03 15:19)
+        ✔ Cache update @started(25-11-03 12:37) @done(25-11-03 15:19) @lasted(2h42m14s)
+        ☐ Add book image
     Formatter:
         ✔ To TXT @started(25-10-04 20:25) @done(25-10-04 23:51) @lasted(3h26m26s)
         ✔ To PDF @done(25-10-07 00:06)
@@ -18,7 +21,7 @@ Parser:
             ✔ Without images @started(25-10-06 19:00) @done(25-10-06 21:49) @lasted(2h49m3s)
         ☐ Settings
             ✔ Color schemes @started(25-10-12 18:47) @done(25-10-13 15:45) @lasted(20h58m43s)
-            ✘ Mobile mode (entropy save us...) @cancelled(25-10-13 17:47)
+            ☐ Mobile mode (entropy save us...)
             ☐ PDF Separation by N
     UI:
         ✔ Make UI @started(25-10-10 21:25) @done(25-10-11 21:56) @lasted(1d31m43s)
@@ -29,9 +32,11 @@ Parser:
     Fixes:
         ✔ Optimize cache by not using folders @started(25-10-08 19:20) @done(25-10-08 19:30) @lasted(10m51s)
         ✔ Remove variables from Class to Init @started(25-10-08 19:59) @done(25-10-08 20:02) @lasted(3m19s)
-        ☐ Fix button getting bigger when outlined
+        ✔ Fix button getting bigger when outlined @done(25-11-03 16:12)
         ✘ Make buttons change color gradually @cancelled(25-10-14 19:35)
-        ☐ Make a log
+        ✔ Make a log @started(25-11-03 16:14) @done(25-11-03 17:23) @lasted(1h9m26s)
         ☐ Make code review
         ✔ Fix buttons not locking during download @done(25-10-14 23:45)
         ✔ Fix progress bar not updating during second download @done(25-10-15 18:15)
+        ☐ Secure requests
+        ☐ Kill thread when exiting

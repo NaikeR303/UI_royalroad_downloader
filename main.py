@@ -32,8 +32,8 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
 
         #Setup
         self.progressBar.setValue(0)
-        self.urlLine.setText("https://www.royalroad.com/fiction/51893/the-heart-grows")
-        # self.urlLine.setText("https://www.royalroad.com/fiction/134167/sector-bomb")
+        # self.urlLine.setText("https://www.royalroad.com/fiction/51893/the-heart-grows")
+        self.urlLine.setText("https://www.royalroad.com/fiction/134167/sector-bomb")
 
         self.rr_light_button.clicked.connect(self.rr_light_bttn)
         self.rr_dark_button.clicked.connect(self.rr_dark_bttn)
@@ -112,6 +112,9 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
 
 
     def _download_bttn(self):
+        self.downloader.redownload = self.delete_check.isChecked()
+        self.downloader.update_cache = self.update_check.isChecked()
+
         self.downloader.set_url(self.urlLine.text())
         self.downloader.get_url_list()
         self.downloader.download()

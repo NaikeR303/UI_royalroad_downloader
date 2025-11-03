@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_design5DXAzCS.ui'
+## Form generated from reading UI file 'ui_design6dQEHMZ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.0
 ##
@@ -17,14 +17,13 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QDialog, QFrame,
     QGridLayout, QLabel, QLineEdit, QProgressBar,
-    QPushButton, QRadioButton, QSizePolicy, QVBoxLayout,
-    QWidget)
+    QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(500, 410)
+        Dialog.resize(500, 440)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -165,11 +164,11 @@ class Ui_Dialog(object):
 
         self.progressBar = QProgressBar(Dialog)
         self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setGeometry(QRect(264, 255, 210, 20))
+        self.progressBar.setGeometry(QRect(8, 408, 484, 25))
         self.progressBar.setValue(24)
         self.verticalFrame1 = QFrame(Dialog)
         self.verticalFrame1.setObjectName(u"verticalFrame1")
-        self.verticalFrame1.setGeometry(QRect(254, 110, 230, 141))
+        self.verticalFrame1.setGeometry(QRect(254, 110, 230, 171))
         self.verticalFrame1.setStyleSheet(u"QPushButton {\n"
 "    background-color: #8D8D8D;\n"
 "    color: black;\n"
@@ -231,7 +230,7 @@ class Ui_Dialog(object):
 "")
         self.gridFrame = QFrame(Dialog)
         self.gridFrame.setObjectName(u"gridFrame")
-        self.gridFrame.setGeometry(QRect(26, 323, 341, 61))
+        self.gridFrame.setGeometry(QRect(26, 323, 331, 71))
         self.gridFrame.setStyleSheet(u"QRadioButton::indicator::unchecked{\n"
 "	background-color: #a3a3a3;\n"
 "	border-radius: 6px;\n"
@@ -253,27 +252,27 @@ class Ui_Dialog(object):
 "}")
         self.gridLayout = QGridLayout(self.gridFrame)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.pdf_box = QCheckBox(self.gridFrame)
+        self.pdf_box.setObjectName(u"pdf_box")
+
+        self.gridLayout.addWidget(self.pdf_box, 2, 1, 1, 1)
+
         self.mobile_box = QCheckBox(self.gridFrame)
         self.mobile_box.setObjectName(u"mobile_box")
         self.mobile_box.setChecked(False)
 
         self.gridLayout.addWidget(self.mobile_box, 1, 1, 1, 1)
 
-        self.pdf_box = QCheckBox(self.gridFrame)
-        self.pdf_box.setObjectName(u"pdf_box")
+        self.update_check = QCheckBox(self.gridFrame)
+        self.update_check.setObjectName(u"update_check")
+        self.update_check.setChecked(False)
 
-        self.gridLayout.addWidget(self.pdf_box, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.update_check, 1, 0, 1, 1)
 
-        self.delete_check = QRadioButton(self.gridFrame)
+        self.delete_check = QCheckBox(self.gridFrame)
         self.delete_check.setObjectName(u"delete_check")
 
         self.gridLayout.addWidget(self.delete_check, 2, 0, 1, 1)
-
-        self.update_check = QRadioButton(self.gridFrame)
-        self.update_check.setObjectName(u"update_check")
-        self.update_check.setChecked(True)
-
-        self.gridLayout.addWidget(self.update_check, 1, 0, 1, 1)
 
 
         self.retranslateUi(Dialog)
@@ -296,8 +295,17 @@ class Ui_Dialog(object):
         self.background_3.setText("")
         self.label_2.setText(QCoreApplication.translate("Dialog", u"Choose a style", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"Download!", None))
+#if QT_CONFIG(tooltip)
+        self.rr_light_button.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p>Light theme that tries to mimic RoyalRoad one</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.rr_light_button.setText(QCoreApplication.translate("Dialog", u"RR Light", None))
+#if QT_CONFIG(tooltip)
+        self.rr_dark_button.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p>Dark theme that tries to mimic RoyalRoad one</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.rr_dark_button.setText(QCoreApplication.translate("Dialog", u"RR Dark", None))
+#if QT_CONFIG(tooltip)
+        self.midnight_button.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><br/></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.midnight_button.setText(QCoreApplication.translate("Dialog", u"Midnight", None))
         self.antique_button.setText(QCoreApplication.translate("Dialog", u"Antique", None))
         self.txt_button.setText(QCoreApplication.translate("Dialog", u"TXT File", None))
@@ -306,9 +314,24 @@ class Ui_Dialog(object):
         self.background_4.setText("")
         self.label_4.setText(QCoreApplication.translate("Dialog", u"Choose settings", None))
         self.stop_button.setText(QCoreApplication.translate("Dialog", u"STOP", None))
-        self.mobile_box.setText(QCoreApplication.translate("Dialog", u"Mobile mode", None))
+#if QT_CONFIG(tooltip)
+        self.pdf_box.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p>Separates into multiple PDF files instead of one big file</p><p>Usually it's a good idea to do that</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.pdf_box.setText(QCoreApplication.translate("Dialog", u"Separate PDF into files", None))
-        self.delete_check.setText(QCoreApplication.translate("Dialog", u"Delete cache", None))
+#if QT_CONFIG(tooltip)
+        self.mobile_box.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p>Makes files readable on the phone<br/><span style=\" font-weight:700; text-decoration: underline;\">GREATLY INCREASES PDF SIZE</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.mobile_box.setText(QCoreApplication.translate("Dialog", u"Mobile mode", None))
+#if QT_CONFIG(tooltip)
+        self.update_check.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p>Updates cache by redownloading everything and replacing old cache</p><p>Does not delete cache, so it won't remove stubbed books</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        self.update_check.setWhatsThis(QCoreApplication.translate("Dialog", u"<html><head/><body><p><br/></p></body></html>", None))
+#endif // QT_CONFIG(whatsthis)
         self.update_check.setText(QCoreApplication.translate("Dialog", u"Update cache", None))
+#if QT_CONFIG(tooltip)
+        self.delete_check.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p>Deletes <span style=\" font-weight:700; text-decoration: underline;\">ALL CHACHE</span> even those that's stubbed<br/>But only for selected book</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.delete_check.setText(QCoreApplication.translate("Dialog", u"Delete cache", None))
     # retranslateUi
 

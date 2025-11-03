@@ -8,6 +8,8 @@
 build*
 dist
 venv*
+test*
+*.log
 # Cache
 cache
 __pycache__
