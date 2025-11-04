@@ -1,12 +1,22 @@
-import re, requests, bs4, time, os, shutil, weasyprint, logging, sys
+import re
+import logging
+import time
+import requests
+import bs4 
+import os
+import sys
+import shutil
+import weasyprint
+import pypdf
+import socket
+import ssl
+import io
 
 
 class Downloader:
     def __init__(self):
         #Example
         #https://www.royalroad.com/fiction/134167/sector-bomb
-
-        self.debug = True
 
         #Variables
         self.fic_cover = {}
@@ -152,9 +162,6 @@ class Downloader:
         return(name)
     
     def to_txt(self):
-        # if not self.list:
-        #     self.download()
-
         file = open(self._get_filename(self.fic_cover["name"]) + ".txt", "w")
 
         #Title
@@ -167,8 +174,8 @@ class Downloader:
 
             for c in content:
                 file.write(c + "\n")
-
-    def _create_html(self, template):
+            
+    def to_html(self, template):
         body = f'<h1><a href="{self.url}">{self.fic_cover['name']}</a></h1>\n<h2>by {self.fic_cover["author"]}</h2>\n<br>\n<br>\n'
 
         for i in range(len(self.list_chap)):
@@ -176,22 +183,47 @@ class Downloader:
             body += f"<h3>{self.list_chap[i]["date"]}</h3>\n"
             body += f"<div>{self.list_chap[i]["content"]}</div>\n<br>\n<br>\n<br>\n"
 
-        with open(template, "r") as template:
-            html = template.read()
+        with open(template, "r") as t:
+            html = t.read()
             html = html.replace("$$$NAME$$$", self.fic_cover["name"]).replace("$$$BODY$$$", body)
 
-        return html
-            
-    def to_html(self, template):
         with open(self._get_filename(self.fic_cover["name"]) + ".html", "w") as file:
-            file.write(self._create_html(template=template))
+            file.write(html)
 
     def to_pdf(self, template): #TODO: Split into files by 100 chapters
-        if self.debug:
-            logging.info("Creating PDF file, it'll take some time. Please wait...")
+        N = 100
 
-        html = weasyprint.HTML(string=self._create_html(template=template))
-        html.write_pdf(self._get_filename(self.fic_cover["name"]) + ".pdf")
+        logging.info("Creating PDF file, it'll take some time...")
+
+        with open(template, "r") as t:
+            html = t.read()
+        
+        chaps = [self.list_chap[i : i + N] for i in range(0, len(self.list_chap), N)]
+
+        def custom_fetcher(url):
+            logging.info(f'Getting image {url}')
+            return weasyprint.default_url_fetcher(url, timeout=10)
+        
+        i = 0
+        for chap in chaps:
+            if chap == chaps[0]:
+                body = f'<h1><a href="{self.url}">{self.fic_cover['name']}</a></h1>\n<h2>by {self.fic_cover["author"]}</h2>\n<br>\n<br>\n'
+            else:
+                body = ''
+
+            for ch in chap:
+                body += f'<h2>{ch["name"]}</h2>\n'
+                body += f'<h3>{ch["date"]}</h3>\n'
+                body += f'<div>{ch["content"]}</div>\n<br>\n<br>\n<br>\n'
+
+            wp = weasyprint.HTML(url_fetcher=custom_fetcher, string=html.replace("$$$NAME$$$", self.fic_cover["name"]).replace("$$$BODY$$$", body))
+            
+            wp.render()
+
+            wp.write_pdf(f"{self.cache_folder}/{i}.pdf")
+
+            i += 1    
+
 
 
 if __name__ == "__main__":
@@ -200,9 +232,9 @@ if __name__ == "__main__":
 
 
     g = Downloader()
-    g.set_url("https://www.royalroad.com/fiction/134167/sector-bomb")
+    g.set_url("https://www.royalroad.com/fiction/124235/die-trying-a-roguelite-extraction-litrpg")
     g.get_url_list()
     g.download()
     # g.to_txt()
-    g.to_html("templates/html/antique.html")
+    g.to_pdf("templates/pdf/antique.html")
     # g.to_pdf()
