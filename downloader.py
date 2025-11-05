@@ -161,6 +161,9 @@ class Downloader:
 
         return(name)
     
+    def _finish_download(self):
+        logging.info("Done!")
+
     def to_txt(self):
         file = open(self._get_filename(self.fic_cover["name"]) + ".txt", "w")
 
@@ -174,6 +177,8 @@ class Downloader:
 
             for c in content:
                 file.write(c + "\n")
+
+        self._finish_download()
             
     def to_html(self, template):
         body = f'<h1><a href="{self.url}">{self.fic_cover['name']}</a></h1>\n<h2>by {self.fic_cover["author"]}</h2>\n<br>\n<br>\n'
@@ -190,10 +195,13 @@ class Downloader:
         with open(self._get_filename(self.fic_cover["name"]) + ".html", "w") as file:
             file.write(html)
 
+        self._finish_download()
+
     def to_pdf(self, template): #TODO: Split into files by 100 chapters
-        N = 100
+        N = 50
 
         logging.info("Creating PDF file, it'll take some time...")
+        logging.info(f"N is set to {N}")
 
         with open(template, "r") as t:
             html = t.read()
@@ -217,12 +225,14 @@ class Downloader:
                 body += f'<div>{ch["content"]}</div>\n<br>\n<br>\n<br>\n'
 
             wp = weasyprint.HTML(url_fetcher=custom_fetcher, string=html.replace("$$$NAME$$$", self.fic_cover["name"]).replace("$$$BODY$$$", body))
-            
-            wp.render()
 
             wp.write_pdf(f"{self.cache_folder}/{i}.pdf")
 
+            logging.info(f"Created {i}.pdf with {len(chap)} chapters")
+
             i += 1    
+
+        self._finish_download()
 
 
 

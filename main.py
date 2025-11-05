@@ -179,7 +179,8 @@ class RoyalRoadDownloader(QDialog, Ui_Dialog):
         def thread():
             self._download_bttn()
 
-            self.progressBar.setFormat("Creating PDF... - %p%")
+            self.progressBar.value = 99
+            self.progressBar.setFormat("Creating PDF. It'll take a while... - %p%")
 
             if self.rr_light_button.property("selected") == True:
                 self.downloader.to_pdf(self._get_base_path() + "/templates/pdf/light.html")

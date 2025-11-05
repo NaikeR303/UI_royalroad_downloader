@@ -1,7 +1,6 @@
 # Trash
 *.pdf
 *.html
-*.ui
 *.txt
 *.sh
 *.spec
